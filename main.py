@@ -155,7 +155,7 @@ def tambah():
     if back == 'y':
         tambah()
     elif back =='n':
-        main()
+        akhir()
     else:
         print("Input tidak valid. Kembali ke Menu Utama.")
         main()
@@ -205,13 +205,16 @@ def ubah():
 
 def ubahbarang(a:int, tgl:str):
     global data
-    items, detail = data[tgl].items()
+    items = data[tgl].keys()
     if a == 1:
         barang = input("Masukkan nama barang yang ingin diubah: ")
         if barang not in items:
             print(f"Tidak ditemukan {barang} di data.")
             ubahbarang(a,tgl)
         barang_new = input("Masukkan nama barang baru: ")
+        while barang_new in items:
+            print(f"Ditemukan {barang_new} di data.")
+            barang_new = input("Masukkan nama barang baru: ")
 
         dum = input("Yakin untuk update data? (y/n)")
         if dum == 'n':
@@ -234,8 +237,7 @@ def ubahbarang(a:int, tgl:str):
 
         next = input("\nLanjut ubah detail barang? (y/n)")
         if next == 'n':
-            print("Kembali ke Menu Ubah Data.")
-            ubah()
+            akhir()
         elif next != 'y':
             print("Input tidak valid.")
             ubah()
@@ -264,8 +266,7 @@ def ubahbarang(a:int, tgl:str):
         data[tgl][barang]['Harga'] = harga
 
         print("\nData berhasil diubah!")
-        print(">>Kembali ke Menu Ubah Data.")
-        ubah()
+        akhir()
 
 def hapus():
     global data
@@ -303,8 +304,7 @@ def hapus():
             print(f"Anda akan menghapus seluruh data untuk tanggal {tanggal}.")
             next = input("Yakin? (y/n)")
             if next == 'n':
-                print("Kembali ke Menu Hapus Data.")
-                hapus()
+                akhir()
             elif next != 'y':
                 print("Input tidak valid. Kembali ke Menu Hapus Data.")
                 hapus()
@@ -319,8 +319,7 @@ def hapus():
             print(f"Anda akan menghapus {barang} dari data tanggal {tanggal}.")
             next = input("Yakin? (y/n)")
             if next == 'n':
-                print("Kembali ke Menu Hapus Data.")
-                hapus()
+                akhir()
             elif next != 'y':
                 print("Input tidak valid. Kembali ke Menu Hapus Data.")
                 hapus()
@@ -330,8 +329,7 @@ def hapus():
             print("Perintah dibatalkan.")
             hapus()
         print("\nHapus data berhasil.")
-        print(">>Kembali ke Menu Hapus Data.")
-        hapus()
+        akhir()
             
     else:
         main()
